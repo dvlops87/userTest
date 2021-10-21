@@ -1,27 +1,96 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+    <title>Sign Up</title>
 </head>
+<!-- body 시작 -->
 <body>
-    <div id="container">
-        <div id="signupBox">
-            <h1>Sign up</h1>
-            <form method="POST" action="{% url 'signup' %}">
+    <!-- 메인컨테이너 시작 -->
+    <div id="main-container">
+        <!-- 로그인 컨테이너 시작 -->
+        <div id="signup-container">
+            <!-- top-title-area 시작 -->
+            <div id="top-title-area">
+                <div class="top-title">
+                    <p>회원가입</p>
+                </div>
+            </div>
+            <!-- top-title-area 끝 -->
+
+            <!-- 회원가입 폼 시작 -->
+            <form id="signup-form" method="POST" action="{% url 'signup' %}">
                 {% csrf_token %}
-                <input type="text" name="school_email" placeholder="이메일을 입력하세요"required><br>
-                <!-- <input type="text" name="school_email_certified" placeholder="인증번호를 입력하세요"required><br> -->
-                <input type="text" name="nickname" placeholder="닉네임을 입력하세요"required><br>
-                <input type="text" name="username" placeholder="아이디를 입력하세요"required><br>
-                <input type="password" name="password" placeholder="비밀번호를 입력하세요"required><br>
-                <input type="text" name="department" placeholder="학과를 입력하세요"required><br>
-                <input type="text" name="school_number" placeholder="학번을 입력하세요"required><br>
-                <button id="signupButton">회원가입</button>
+                <div class="item">
+                    <div class="middle-title">
+                        <p>닉네임</p>
+                    </div>
+                    <div class="input-area">
+                        <input class="input-box" type="text" name="nickname" placeholder="닉네임 입력"required>
+                        <button class="white-button">중복 확인</button>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="middle-title">
+                        <p>ID</p>
+                    </div>
+                    <div class="input-area">
+                        <input class="input-box" type="text" name="username" placeholder="ID 입력"required><br>
+                        <button class="white-button">중복 확인</button>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="middle-title">
+                        <p>비밀번호</p>
+                    </div>
+                    <div class="input-area">
+                        <input class="input-box" type="password" name="password" placeholder="비밀번호 입력"required><br>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="middle-title">
+                        <p>비밀번호 확인</p>
+                    </div>
+                    <div class="input-area">
+                        <input class="input-box" type="password" name="verify_password" placeholder="비밀번호 재입력"required><br>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="middle-title">
+                        <p>이메일</p>
+                    </div>
+                    <div class="input-area">
+                        <input class="input-box" type="text" name="school_email" placeholder="이메일 주소 입력"required><br>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="middle-title">
+                        <p>학과</p>
+                    </div>
+                    <div class="input-area">
+                        <input class="input-box" type="text" name="department" placeholder="학과 입력"required><br>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="middle-title">
+                        <p>학번</p>
+                    </div>
+                    <div class="input-area">
+                        <input class="input-box" type="text" name="school_number" placeholder="학번 입력"required><br>
+                    </div>
+                </div>
+                <button class="blue-button">순부름 시작하기</button>
             </form>
+            <!-- 회원가입 폼 끝 -->
         </div>
+        <!-- 로그인 컨테이너 끝 -->
     </div>
+    <!-- 메인컨테이너 끝 -->
 </body>
 </html>
