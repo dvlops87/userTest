@@ -15,31 +15,49 @@
     <div id="main-container">
         <!-- 로그인 컨테이너 시작 -->
         <div id="login-container">
-            <!-- 로고 area 시작 -->
+            <!-- 로고 영역 시작 -->
             <div id="logo-area">
                 <img src="{% static 'image/logo.svg' %}" alt="로고">
             </div>
+            <!-- 로고 영역 끝 -->
             <!-- 로그인 폼 시작 -->
-            <form method="POST" action="{% url 'login' %}" class="login">
+            <form id="login-form" method="POST" action="{% url 'login' %}">
                 {% csrf_token %}
                 <div class="item">
-                    <div class="middle-title">
+                    <div class="icon-area">
                         <img src="{% static 'image/id.svg' %}" alt="ID">
                     </div>
                     <div class="input-area">
                         <input class="input-box" type="text" name="nickname" placeholder="ID"required>
                     </div>
                 </div>
-                <input type="password" name="password" placeholder="비밀번호" />
-                <button>로그인</button>
-                <button>회원가입</button>
+                <div class="item">
+                    <div class="icon-area">
+                        <img src="{% static 'image/password.svg' %}" alt="ID">
+                    </div>
+                    <div class="input-area">
+                        <input class="input-box" type="password" name="password" placeholder="비밀번호" />                    </div>
+                </div>
+                <div id="button-area">
+                    <button class="blue big-button">로그인</button>
+                    <button class="gray big-button">회원가입</button>
+                </div>
                 {% if 'error' %}
                     <p>{{error}}</p>
                 {% endif %}
-                <a href="{% url 'find_id' %}">ID 찾기</a>
-                <span>/</span>
-                <a href="{% url 'find_password' %}">비밀번호 찾기</a>
+                <!-- 찾기 영역 시작 -->
+                <div id="sub-area">
+                    <a class="link-find" href="{% url 'find_id' %}">ID 찾기</a>
+                    <span class="border-line">/</span>
+                    <a class="link-find" href="{% url 'find_password' %}">비밀번호 찾기</a>
+                </div>
+                <!-- 찾기 영역 끝 -->
             </form>
+            <!-- 로그인 폼 끝 -->
+            <!-- 여백 시작 -->
+            <div id="logo-area" class="white-space">
+            </div>
+            <!-- 여백 끝 -->
         </div>
         <!-- 로그인 컨테이너 끝 -->
     </div>
