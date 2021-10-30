@@ -14,7 +14,7 @@ body {
   justify-content: center;
 }
 
-#find-id-container {
+#find-container {
   height: 100%;
   width: 100%;
   display: flex;
@@ -73,8 +73,8 @@ body {
 
 /* 중앙 컨테이너 끝 */
 
-/* 아이디 찾기 폼 시작 */
-#find-id-form {
+/* 찾기 폼 시작 */
+#find-form {
   width: 100%;
   margin: 30px 0px;
 }
@@ -131,4 +131,4 @@ body {
 }
 /* 버튼 영역 끝 */
 
-/* 아이디 찾기 폼 끝 */
+/*찾기 폼 끝 */
