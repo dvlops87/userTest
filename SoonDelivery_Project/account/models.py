@@ -8,5 +8,8 @@ from django.db import models
 class User(AbstractUser):
     nickname = models.CharField(max_length=30)
     school_email = models.EmailField()
+    department = models.CharField(max_length=50, default='')
+    school_number = models.CharField(max_length=8,default='')
     rating_order = models.IntegerField(default=0)
     rating_delivery = models.IntegerField(default=0)
+    is_active = models.BooleanField(default=False)
