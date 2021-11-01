@@ -71,3 +71,30 @@ def user_signup(request):
         email = EmailMessage(mail_subject, message, to=[user_email])
         email.send()
     return render(request, 'signup.html')
+
+def find_id(request):
+    if request.method == "POST":
+        user_email = request.POST["school_email"]
+        user = User.objects.get(school_email = user_email)
+        message = render_to_string('find_email.html',                         {
+            'username': user.username,
+            'password': user.password
+        })
+        mail_subject = "[순부름] 아이디 찾기 메일입니다."
+        email = EmailMessage(mail_subject, message, to=[user_email])
+        email.send()
+        return redirect('login')
+    return render(request, 'find_id.html')
+
+def find_password(request):
+    if request.method == "POST":
+        user_email = request.POST["school_email"]
+        user = User.objects.get(school_email = user_email)
+        message = render_to_string('find_email.html',                         {
+            'user': user
+        })
+        mail_subject = "[순부름] 비밀번호 찾기 메일입니다."
+        email = EmailMessage(mail_subject, message, to=[user_email])
+        email.send()
+        return redirect('login')
+    return render(request, 'find_password.html')
