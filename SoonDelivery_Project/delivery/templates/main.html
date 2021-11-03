@@ -20,26 +20,29 @@
             <p class="explain">필요한 물건을 언제든지<br>주고받는 순천향 심부름 커뮤니티</p>
         </div>
         <div class="order-button-space">
-            <button id="order-button">주문하기</button>
+            <a href="{% url 'order' user.id %}"><button id="order-button">주문하기</button></a>
         </div>
         <div class="order-list-space">
             <div class="order-list-tag">배달 목록</div>
             <div class="order-list">
+                {% for order in order_list %}
                 <div class="order">
                     <div class="user-profile-pic-space">
                         <img class="user-profile-pic" src="#" alt="사용자 프로필 사진">
                     </div>
                     <div class="order-preview-space">
                         <div class="user-name-space">
-                            <p class="user-name">{}님</p>
+                            <p class="user-name">{{order.owner}}님</p>
                         </div>
                         <div class="order-preview">
-                            <p class="order-menu">배달 물건 : {}</p>
-                            <p class="order-place">배달 장소 : {}</p>
-                            <p class="order-tip">배달 팁 : {}</p>
+                            <p class="order-menu">배달 물건 : {{order.delivery_list}}</p>
+                            <p class="order-place">배달 장소 : {{order.delivery_location}}</p>
+                            <p class="order-tip">배달 팁 : {{order.delivery_price}}</p>
                         </div>
+                        <a href="{% url 'order_delivery' order.id %}">자세히 보기</a>
                     </div>
                 </div>
+                {% endfor %}
             </div>
         </div>
     </div>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배달하기</title>
+</head>
+<body>
+    <p>요청자 닉네임: {{order_list.delivery_onwer.nickname}}</p>
+    <p>배달 주소 : {{order_list.delivery_location}}</p>
+    <p>가게 주소 : {{order_list.store_location}}</p>
+    <p>요구사항 : {{order_list.extra_order}}</p>
+    <p>심부름 비용 : {{order_list.delivery_price}}</p>
+    <p>구매 한도 : {{order_list.stuff_price}}</p>
+    <a href="{% url 'start_delivery' order_id %}">배달 시작하기</a>
+</body>
+</html>
