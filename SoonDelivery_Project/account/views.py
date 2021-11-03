@@ -17,12 +17,12 @@ from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from .tokens import account_activation_token
 # Create your views here.
-def home(request):
-    return render(request, 'home.html')
+# def home(request):
+#     return render(request, 'home.html')
 
 def user_login(request):
     if request.method == "POST":
-        username = request.POST["username"]
+        username = request.POST["nickname"]
         password = request.POST["password"]
         user = authenticate(username = username, password = password)
         
