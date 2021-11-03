@@ -1,29 +1,49 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
     <title>login</title>
 </head>
+<!-- body 시작 -->
 <body>
-    <div class="login-page">
-        <div class="form">
+    <!-- 메인 컨테이너 시작 -->
+    <div id="main-container">
+        <!-- 로그인 컨테이너 시작 -->
+        <div id="login-container">
+            <!-- 로고 area 시작 -->
+            <div id="logo-area">
+                <img src="{% static 'image/logo.svg' %}" alt="로고">
+            </div>
+            <!-- 로그인 폼 시작 -->
             <form method="POST" action="{% url 'login' %}" class="login">
-                
                 {% csrf_token %}
-                <input type="text" name="username" placeholder="아이디" />
+                <div class="item">
+                    <div class="middle-title">
+                        <img src="{% static 'image/id.svg' %}" alt="ID">
+                    </div>
+                    <div class="input-area">
+                        <input class="input-box" type="text" name="nickname" placeholder="ID"required>
+                    </div>
+                </div>
                 <input type="password" name="password" placeholder="비밀번호" />
                 <button>로그인</button>
-                <p>회원이 아니시라면?</p>
+                <button>회원가입</button>
                 {% if 'error' %}
-                <p>{{error}}</p>
+                    <p>{{error}}</p>
                 {% endif %}
-                <a href="register.html">회원가입 하러가기</a>
-                <a href="{% url 'find_id' %}">아이디 찾기</a>
+                <a href="{% url 'find_id' %}">ID 찾기</a>
+                <span>/</span>
                 <a href="{% url 'find_password' %}">비밀번호 찾기</a>
             </form>
         </div>
+        <!-- 로그인 컨테이너 끝 -->
     </div>
+    <!-- 메인 컨테이너 끝 -->
 </body>
+<!-- body 끝 -->
 </html>
