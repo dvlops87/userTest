@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>나의 주문/배달</title>
+</head>
+<body>
+    {% for delivery in delivery_history %}
+        {% if delivery.is_delivered == 1 %}
+        <p>배달 중인 주문</p>
+        {% else %}
+        <p>배달 완료</p>
+        {% endif %}
+    <p>배달 물건 : {{delivery.delivery_list}}</p>
+    <p>배달 장소 : {{delivery.delivery_location}}</p>
+    <p>배달팁 : {{delivery.delivery_price}}</p>
+    <a href="{% url 'delivery_detail' delivery.id %}">자세히 보기</a>
+    {% endfor %}
+</body>
+</html>

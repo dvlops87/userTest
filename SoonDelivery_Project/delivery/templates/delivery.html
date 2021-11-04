@@ -13,6 +13,6 @@
     <p>요구사항 : {{order_list.extra_order}}</p>
     <p>심부름 비용 : {{order_list.delivery_price}}</p>
     <p>구매 한도 : {{order_list.stuff_price}}</p>
-    <a href="{% url 'start_delivery' order_id %}">배달 시작하기</a>
+    <a href="{% url 'start_delivery' user.id order_list.id %}">배달 시작하기</a>
 </body>
 </html>

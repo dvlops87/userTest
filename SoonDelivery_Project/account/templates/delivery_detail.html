@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>나의 주문</title>
+</head>
+<body>
+    {% if details.is_delivered == 2 %}
+    <p>배달이 {{time}}분만에 도착했습니다.</p>
+    {% else %}
+    <p>{{details.delivery_man.nickname}}님이 {{details.delivery_owner.nickname}}에게 배달 중 입니다!</p>
+    {% endif %}
+    
+    <p>주문 상품 : {{details.delivery_list}}</p>
+    <p>주문 일시 : {{details.ordered_time}}</p>
+    <p>배달 주소 : {{details.delivery_location}}</p>
+    <p>요구 사항 : {{details.extra_order}}</p>
+    
+    {% if details.is_delivered == 1 %}
+    <a href="{% url 'finish_delivery' details.id %}">배달 완료 수락하기</a>
+    {% else %}
+    <p>배달 완료된 주문입니다.</p>
+    {% endif %}
+    
+</body>
+</html>

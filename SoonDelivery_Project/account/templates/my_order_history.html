@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>나의 주문/배달</title>
+</head>
+<body>
+    {% for order in order_history %}
+        {% if order.is_delivered == 1 %}
+        <p>배달 중인 주문</p>
+        {% elif order.is_delivered == 0 %}
+        <p>순부름꾼을 기다리는 주문</p>
+        {% else %}
+        <p>배달 완료</p>
+        {% endif %}
+    <p>배달 물건 : {{order.delivery_list}}</p>
+    <p>배달 장소 : {{order.delivery_location}}</p>
+    <p>배달팁 : {{order.delivery_price}}</p>
+    {% endfor %}
+</body>
+</html>
