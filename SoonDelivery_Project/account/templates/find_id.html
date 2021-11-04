@@ -1,16 +1,59 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/find.css' %}">
     <title>Document</title>
 </head>
+<!-- body 시작 -->
 <body>
-    <form method="POST" action="{% url 'find_id' %}">
-        {% csrf_token %}
-        <input type="text" name="school_email" placeholder="이메일을 입력하세요"required><br>
-        <button id="signupButton">아이디 찾기</button>
-    </form>
+    <!-- 메인컨테이너 시작 -->
+    <div id="main-container">
+        <!-- 아이디 찾기 컨테이너 시작 -->
+        <div id="find-container">
+            <!-- 제목 영역시작 -->
+            <div id="top-title-area">
+                <div class="top-title">
+                    <p>ID 찾기</p>
+                </div>
+            </div>
+            <!-- 제목 영역 끝 -->
+            <!-- 중앙 컨테이너 시작 -->
+            <div id="center-container">
+                <div class="description">
+                    <p>순부름 서비스에 회원가입한<br>이메일을 입력해 주세요<br>ID가 전송됩니다.</p>
+                </div>
+                <!-- 찾기 폼 시작 -->
+                <form id="find-form" method="POST" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <div class="item">
+                        <div class="icon-area">
+                            <img src="{% static 'image/email.svg' %}" alt="email">
+                        </div>
+                        <div class="input-area">
+                            <input class="input-box" type="text" name="nickname" placeholder="이메일 입력" required>
+                        </div>
+                    </div>
+                    <div id="button-area">
+                        <button class="gray big-button">이메일 전송</button>
+                    </div>
+                    {% if 'error' %}
+                        <p>{{error}}</p>
+                    {% endif %}
+                </form>
+                <!-- 찾기 폼 끝 -->
+                <!-- 여백 영역 시작 -->
+                <div class="white-space"></div>
+                <!-- 여백 영역 끝 -->
+            </div>
+            <!-- 중앙 컨테이너 끝 -->
+        </div>
+        <!-- 로그인 컨테이너 끝 -->
+    </div>
+    <!-- 메인컨테이너 끝 -->
 </body>
 </html>
