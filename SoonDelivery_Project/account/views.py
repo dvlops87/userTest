@@ -18,6 +18,7 @@ from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from .tokens import account_activation_token 
 from datetime import datetime, timezone
+from django.contrib.auth.hashers import check_password
 # Create your views here.
 # def home(request):
 #     return render(request, 'home.html')
@@ -72,7 +73,7 @@ def user_signup(request):
         user_email = user.school_email
         email = EmailMessage(mail_subject, message, to=[user_email])
         email.send()
-    return render(request, 'signup.html')
+    return redirect('home')
 
 def find_id(request):
     if request.method == "POST":
@@ -124,3 +125,19 @@ def finish_delivery(request, delivery_id):
         details.time_required = time
         details.save()
     return render(request, 'delivery_detail.html', {'details':details, 'time':details.time_required})
+
+def mypage(request, user_id):
+    details = get_object_or_404(User, id=user_id)
+    if request.method == "POST" and 'change_password' in request.POST:
+        input_password = request.POST.get("old_password")
+        if check_password(input_password, details.password):
+            details.set_password(request.POST.get("new_password"))
+            details.save()
+            return render(request, 'mypage.html', {'details':details})
+        else:
+            error = '현재 비밀번호가 올바르지 않습니다'
+            return render(request, 'mypage.html', {'details':details, 'error':error})
+    else:
+        details.image = request.FILES['image']
+        details.save()
+        return render(request, 'mypage.html', {'details':details})

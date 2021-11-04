@@ -28,7 +28,8 @@ def order(request, user_id):
 
 def order_delivery(request, order_id):
     order_list = get_object_or_404(delivery_info, pk=order_id)
-    return render(request, 'delivery.html', {'order_list':order_list, 'order_id': order_id})
+    name = order_list.delivery_owner
+    return render(request, 'delivery.html', {'order_list':order_list, 'order_id': order_id, 'name':name})
 
 def start_delivery(request, user_id, order_id):
     order_detail = delivery_info.objects.get(id=order_id)
