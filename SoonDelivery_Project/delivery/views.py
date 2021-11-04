@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate
 from .models import delivery_info
 from account.models import User
+from django.utils import timezone
 # Create your views here.
 
 
@@ -12,6 +13,7 @@ def home(request):
 def order(request, user_id):
     if request.method == 'POST':
         new_order = delivery_info()
+        new_order.ordered_time = timezone.now()
         new_order.delivery_location = request.POST["delivery_location"]
         new_order.delivery_price = request.POST["delivery_price"]
         new_order.delivery_list = request.POST["delivery_list"]
@@ -28,8 +30,10 @@ def order_delivery(request, order_id):
     order_list = get_object_or_404(delivery_info, pk=order_id)
     return render(request, 'delivery.html', {'order_list':order_list, 'order_id': order_id})
 
-def start_delivery(request, order_id):
+def start_delivery(request, user_id, order_id):
     order_detail = get_object_or_404(delivery_info, pk=order_id)
+    user = User.objects.get(id=user_id)
+    order_detail.delivery_man = user
     order_detail.is_delivered = 1
     order_detail.save()
     nickname = order_detail.delivery_owner.nickname

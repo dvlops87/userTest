@@ -30,9 +30,13 @@ urlpatterns = [
     path('activate/<str:uid64>/<str:token>', a.activate, name='activate'),
     path('login/find_id/', a.find_id, name='find_id'),
     path('login/find_password/', a.find_password, name='find_password'),
+    path('my_delivery_history/<str:user_id>', a.my_delivery_history, name='my_delivery_history'),
+    path('my_order_history/<str:user_id>', a.my_order_history, name='my_order_history'),
+    path('delivery_detail/<str:delivery_id>', a.delivery_detail, name='delivery_detail'),
+    path('finished_delivery/<str:delivery_id>', a.finish_delivery, name='finish_delivery'),
 
     path('', d.home, name="home"),
     path('order/<str:user_id>', d.order, name='order'),
     path('order_delivery/<str:order_id>', d.order_delivery, name="order_delivery"),
-    path('start_delivery/<str:order_id>', d.start_delivery, name="start_delivery"),
+    path('start_delivery/<int:user_id>/<str:order_id>', d.start_delivery, name="start_delivery"),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

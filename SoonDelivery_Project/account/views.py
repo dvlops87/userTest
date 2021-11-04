@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from .models import User
+from delivery.models import delivery_info
 from django.contrib import auth
 from .text import message
 import jwt
@@ -15,7 +16,8 @@ from django.core.exceptions import ValidationError
 from django.views.generic import View
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
-from .tokens import account_activation_token
+from .tokens import account_activation_token 
+from datetime import datetime, timezone
 # Create your views here.
 # def home(request):
 #     return render(request, 'home.html')
@@ -98,3 +100,25 @@ def find_password(request):
         email.send()
         return redirect('login')
     return render(request, 'find_password.html')
+
+def my_delivery_history(request, user_id):
+    delivery_history = delivery_info.objects.filter(delivery_man=user_id) 
+    return render(request, 'my_delivery_history.html', {'delivery_history':delivery_history})
+
+def my_order_history(request, user_id):
+    order_history =delivery_info.objects.filter(delivery_owner=user_id)
+    return render(request, 'my_order_history.html', {'order_history':order_history})
+
+def delivery_detail(request, delivery_id):
+    details = get_object_or_404(delivery_info, pk=delivery_id)
+    return render(request, 'delivery_detail.html', {'details':details})
+
+def finish_delivery(request, delivery_id):
+    details = delivery_info.objects.get(id=delivery_id)
+    now = datetime.now(timezone.utc)
+    date_to_compare = details.ordered_time
+    date_diff = now - date_to_compare
+    time = round(date_diff.seconds / 60)
+    details.is_delivered = 2
+    details.save()
+    return render(request, 'delivery_detail.html', {'details':details, 'time':time})
