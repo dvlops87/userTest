@@ -10,6 +10,7 @@ class delivery_info(models.Model):
     ordered_time = models.DateTimeField(auto_now_add=True, blank=True)
     delivered_time = models.DateTimeField(auto_now_add=True, blank=True)
     delivery_price = models.IntegerField(default=0)
+    time_required = models.IntegerField(default=0)
     stuff_price = models.IntegerField(default=0)
     delivery_list = models.TextField(default='')
     extra_order = models.TextField(default='')

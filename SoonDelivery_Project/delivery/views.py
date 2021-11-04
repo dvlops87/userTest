@@ -31,7 +31,8 @@ def order_delivery(request, order_id):
     return render(request, 'delivery.html', {'order_list':order_list, 'order_id': order_id})
 
 def start_delivery(request, user_id, order_id):
-    order_detail = get_object_or_404(delivery_info, pk=order_id)
+    order_detail = delivery_info.objects.get(id=order_id)
+    order_detail.time_required = 0
     user = User.objects.get(id=user_id)
     order_detail.delivery_man = user
     order_detail.is_delivered = 1

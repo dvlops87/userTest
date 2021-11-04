@@ -111,14 +111,16 @@ def my_order_history(request, user_id):
 
 def delivery_detail(request, delivery_id):
     details = get_object_or_404(delivery_info, pk=delivery_id)
-    return render(request, 'delivery_detail.html', {'details':details})
+    return render(request, 'delivery_detail.html', {'details':details, 'time':details.time_required})
 
 def finish_delivery(request, delivery_id):
     details = delivery_info.objects.get(id=delivery_id)
-    now = datetime.now(timezone.utc)
-    date_to_compare = details.ordered_time
-    date_diff = now - date_to_compare
-    time = round(date_diff.seconds / 60)
-    details.is_delivered = 2
-    details.save()
-    return render(request, 'delivery_detail.html', {'details':details, 'time':time})
+    if(details.is_delivered != 2):
+        now = datetime.now(timezone.utc)
+        date_to_compare = details.ordered_time
+        date_diff = now - date_to_compare
+        time = int(round(date_diff.seconds / 60))
+        details.is_delivered = 2
+        details.time_required = time
+        details.save()
+    return render(request, 'delivery_detail.html', {'details':details, 'time':details.time_required})
