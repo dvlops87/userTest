@@ -13,3 +13,4 @@ class User(AbstractUser):
     rating_order = models.IntegerField(default=0)
     rating_delivery = models.IntegerField(default=0)
     is_active = models.BooleanField(default=False)
+    image = models.ImageField(upload_to = "userImage/", blank=True, null=True)
