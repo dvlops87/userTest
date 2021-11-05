@@ -1,0 +1,134 @@
+html {
+  height: 100vh;
+  font-size: 10px;
+}
+
+body {
+  height: 100vh;
+}
+
+#main-container {
+  height: 100%;
+  margin: 0px 36px;
+  display: flex;
+  justify-content: center;
+}
+
+#find-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* top-title-area 시작 */
+#top-title-area {
+  width: 100%;
+  margin: 30px 0px;
+  border-bottom: 2px solid #a7a7a7;
+  display: flex;
+  justify-content: center;
+}
+
+.top-title p {
+  margin: 20px;
+  font-size: 2rem;
+  color: #707070;
+}
+/* top-title-area 끝 */
+
+/* 중앙 컨테이너 시작 */
+#center-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+.description {
+  width: 197px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  margin: 30px 0px;
+}
+
+.description p {
+  font-size: 1.2rem;
+  color: #707070;
+  text-align: center;
+  line-height: 20px;
+}
+
+.white-space {
+  width: 197px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  margin: 30px 0px;
+}
+
+/* 중앙 컨테이너 끝 */
+
+/* 찾기 폼 시작 */
+#find-form {
+  width: 100%;
+  margin: 30px 0px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  height: 30px;
+  border-radius: 7px;
+  border: 2px solid #a7a7a7;
+  margin: 0px 24px 15px;
+}
+
+.icon-area {
+  width: 33px;
+  border-right: 2px solid #a7a7a7;
+  margin-right: 8px;
+  display: flex;
+  justify-content: center;
+}
+
+.icon-area img {
+  width: 15px;
+  height: 12px;
+}
+
+.input-box {
+  border: none;
+  font-size: 1.2rem;
+}
+
+/* 버튼 영역 시작 */
+
+#button-area {
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+  margin: 0px 24px 15px;
+}
+
+.big-button {
+  height: 35px;
+  border-radius: 7px;
+  border: none;
+  box-shadow: 0px 3px 6px #0000003f;
+  font-size: 1.2rem;
+  color: #707070;
+  flex: 1;
+}
+
+.gray {
+  background-color: #ececec;
+}
+/* 버튼 영역 끝 */
+
+/*찾기 폼 끝 */

@@ -1,0 +1,87 @@
+html {
+  font-size: 10px;
+}
+
+#main-container {
+  margin: 30px 36px 50px;
+  display: flex;
+  justify-content: center;
+}
+
+#signup-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* top-title-area 시작 */
+#top-title-area {
+  width: 100%;
+  margin-bottom: 50px;
+  border-bottom: 2px solid #a7a7a7;
+  display: flex;
+  justify-content: center;
+}
+
+.top-title p {
+  margin: 20px;
+  font-size: 2rem;
+  color: #707070;
+}
+/* top-title-area 끝 */
+
+/* 회원가입 폼 시작 */
+#signup-form {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.item {
+  width: 100%;
+  margin: 15px 0px;
+}
+
+.middle-title p {
+  font-size: 1.4rem;
+  color: #707070;
+  margin-bottom: 10px;
+}
+
+.input-area {
+  display: flex;
+}
+
+.input-box {
+  font-size: 1.2rem;
+  height: 25px;
+  flex: 7;
+  border: none;
+  border-bottom: 1px solid #a7a7a7;
+}
+
+.white-button {
+  width: 90px;
+  margin-left: 5px;
+  border-radius: 7px;
+  border: 1px solid #a7b3ff;
+  background-color: white;
+  font-size: 1.2rem;
+  color: #707070;
+}
+
+.blue-button {
+  height: 35px;
+  width: 150px;
+  border-radius: 7px;
+  border: none;
+  margin-top: 20px;
+  background-color: #a7b3ff;
+  box-shadow: 0px 3px 6px #0000003f;
+  font-size: 1.4rem;
+  color: #707070;
+}
+/* 회원가입 폼 끝 */
