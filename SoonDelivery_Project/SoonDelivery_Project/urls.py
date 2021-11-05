@@ -26,6 +26,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # path('', a.home, name="home"),
     path('login/', a.user_login, name='login'),
+    path('logout/', a.user_logout, name='logout'),
     path('signup/', a.user_signup, name='signup'),
     path('activate/<str:uid64>/<str:token>', a.activate, name='activate'),
     path('login/find_id/', a.find_id, name='find_id'),

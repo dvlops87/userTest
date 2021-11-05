@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
+from django.views.generic.base import RedirectView
 from .models import User
 from delivery.models import delivery_info
 from django.contrib import auth
@@ -43,7 +44,7 @@ def activate(request, uid64, token):
     user = User.objects.get(pk=uid)
 
     if user is not None and account_activation_token.check_token(user, token):
-        user.is_active = True
+        user.is_trial = True
         user.save()
         auth.login(request, user)
         return redirect('home')
@@ -60,7 +61,7 @@ def user_signup(request):
             school_email = request.POST["school_email"],
             school_number = request.POST["school_number"],
         )
-        user.is_active = False
+        user.is_trial = True
         user.save()
         current_site = get_current_site(request) 
         message = render_to_string('user_activate_email.html',                         {
@@ -73,6 +74,11 @@ def user_signup(request):
         user_email = user.school_email
         email = EmailMessage(mail_subject, message, to=[user_email])
         email.send()
+        return redirect('home')
+    return render(request, 'signup.html')
+
+def user_logout(request):
+    logout(request)
     return redirect('home')
 
 def find_id(request):
@@ -102,9 +108,14 @@ def find_password(request):
         return redirect('login')
     return render(request, 'find_password.html')
 
-def my_delivery_history(request, user_id):
-    delivery_history = delivery_info.objects.filter(delivery_man=user_id) 
-    return render(request, 'my_delivery_history.html', {'delivery_history':delivery_history})
+def my_delivery_history(request, user_id=0):
+    if user_id == 0:
+        redirect('login')
+    try:
+        delivery_history = delivery_info.objects.filter(delivery_man=user_id) 
+        return render(request, 'my_delivery_history.html', {'delivery_history':delivery_history})
+    except ValueError:
+        return redirect('login')
 
 def my_order_history(request, user_id):
     order_history =delivery_info.objects.filter(delivery_owner=user_id)
@@ -126,18 +137,26 @@ def finish_delivery(request, delivery_id):
         details.save()
     return render(request, 'delivery_detail.html', {'details':details, 'time':details.time_required})
 
-def mypage(request, user_id):
-    details = get_object_or_404(User, id=user_id)
-    if request.method == "POST" and 'change_password' in request.POST:
-        input_password = request.POST.get("old_password")
-        if check_password(input_password, details.password):
-            details.set_password(request.POST.get("new_password"))
-            details.save()
-            return render(request, 'mypage.html', {'details':details})
-        else:
-            error = '현재 비밀번호가 올바르지 않습니다'
-            return render(request, 'mypage.html', {'details':details, 'error':error})
-    else:
-        details.image = request.FILES['image']
-        details.save()
-        return render(request, 'mypage.html', {'details':details})
+def mypage(request, user_id=0):
+    if user_id == 0:
+        redirect('login')
+    else :
+        try: 
+            details = get_object_or_404(User, id=user_id)
+            if request.method == "POST" and 'change_password' in request.POST:
+                input_password = request.POST.get("old_password")
+                if check_password(input_password, details.password):
+                    details.set_password(request.POST.get("new_password"))
+                    details.save()
+                    return render(request, 'mypage.html', {'details':details})
+                else:
+                    error = '현재 비밀번호가 올바르지 않습니다'
+                    return render(request, 'mypage.html', {'details':details, 'error':error})
+            elif request.FILES.get('image') is not None:
+                details.image = request.FILES.get('image')
+                details.save()
+                return render(request, 'mypage.html', {'details':details})
+            else:
+                return render(request, 'mypage.html', {'details':details})
+        except ValueError:
+            return redirect('login')
