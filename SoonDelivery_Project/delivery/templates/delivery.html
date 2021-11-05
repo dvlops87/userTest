@@ -1,18 +1,66 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>배달하기</title>
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/delivery.css' %}">
+    <title>Detail</title>
 </head>
+<!-- body 시작 -->
 <body>
-    <p>요청자 닉네임: {{name.nickname}}</p>
-    <p>배달 주소 : {{order_list.delivery_location}}</p>
-    <p>가게 주소 : {{order_list.store_location}}</p>
-    <p>요구사항 : {{order_list.extra_order}}</p>
-    <p>심부름 비용 : {{order_list.delivery_price}}</p>
-    <p>구매 한도 : {{order_list.stuff_price}}</p>
-    <a href="{% url 'start_delivery' user.id order_list.id %}">배달 시작하기</a>
+    <!-- 메인컨테이너 시작 -->
+    <div id="main-container">
+        <!-- 주문 컨테이너 시작 -->
+        <div id="order-container">
+            <!-- top-title-area 시작 -->
+            <div id="top-title-area">
+                <img src="{% static 'img/back-icon.svg' %}" alt="뒤로가기">
+                <div class="top-title">
+                    <p>배달 세부 사항</p>
+                </div>
+                <div class="top-white-space"></div>
+            </div>
+            <!-- top-title-area 끝 -->
+            <!-- 중앙 컨테이너 시작 -->
+            <div id="center-container">
+                <p class="description">{{order_list.delivery_onwer.nickname}}님의 주문서</p>
+                <div id="order-area">
+                    {% csrf_token %}
+                    <div class="input-container">
+                        <p>배달 주소 : {{order_list.delivery_location}}</p>
+                    </div>
+                    <div class="input-container">
+                        <p>상점 주소 : {{order_list.store_location}}</p>
+                    </div>
+                    <div class="input-container">
+                        <p>주문 금액 : {{order_list.stuff_price}}</p>
+                    </div>
+                    <div class="input-container">
+                        <p>배달 팁 : {{order_list.delivery_price}}</p>
+                    </div>
+                    <div class="input-container">
+                        <p>상품 명 : {{order_list.delivery_list}}</p>
+                    </div>
+                    <div class="input-container">
+                        <p>기타 요구 사항 : {{order_list.extra_order}}</p>
+                    </div>
+                </div>
+            </div>
+            <!-- 중앙 컨테이너 끝 -->
+            <a href="{% url 'start_delivery' user.id order_list.id %}">
+                <button class="blue big-button" onclick="">배달하기</button>
+            </a>
+        <!-- 주문하기 폼 끝 -->
+            <!-- 여백 시작 -->
+            <div class="white-space"></div>
+            <!-- 여백 끝 -->
+        </div>
+        <!-- 주문 컨테이너 끝 -->
+    </div>
+    <!-- 메인컨테이너 끝 -->
 </body>
 </html>
