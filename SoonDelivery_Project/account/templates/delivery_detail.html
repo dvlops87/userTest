@@ -1,28 +1,78 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>나의 주문</title>
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/delivery_detail.css' %}">
+    <title>Detail</title>
 </head>
+<!-- body 시작 -->
 <body>
-    {% if details.is_delivered == 2 %}
-    <p>배달이 {{time}}분만에 도착했습니다.</p>
-    {% else %}
-    <p>{{details.delivery_man.nickname}}님이 {{details.delivery_owner.nickname}}에게 배달 중 입니다!</p>
-    {% endif %}
-    
-    <p>주문 상품 : {{details.delivery_list}}</p>
-    <p>주문 일시 : {{details.ordered_time}}</p>
-    <p>배달 주소 : {{details.delivery_location}}</p>
-    <p>요구 사항 : {{details.extra_order}}</p>
-    
-    {% if details.is_delivered == 1 %}
-    <a href="{% url 'finish_delivery' details.id %}">배달 완료 수락하기</a>
-    {% else %}
-    <p>배달 완료된 주문입니다.</p>
-    {% endif %}
-    
+    <!-- 메인컨테이너 시작 -->
+    <div id="main-container">
+        <!-- 주문 컨테이너 시작 -->
+        <div id="order-container">
+            <!-- top-title-area 시작 -->
+            <div id="top-title-area">
+                <img src="{% static 'img/back-icon.svg' %}" alt="뒤로가기">
+                <div class="top-title">
+                    <p>나의 주문</p>
+                </div>
+                <div class="top-white-space"></div>
+            </div>
+            <!-- top-title-area 끝 -->
+            <!-- 중앙 영역 시작 -->
+            <div id=middle-area>
+                <div class="blue big-button center-align">
+                    <p class="bold">주문 상세사항</p>
+                </div>
+                <!-- 중앙 컨테이너 시작 -->
+                <div id="center-container">
+                    <div id="content-container">
+                        {% if details.is_delivered == 2 %}
+                        <p>배달이 {{time}}분만에 도착했습니다.</p>
+                        {% endif %}
+                        <div class="bold name-info">
+                            <p>{{details.delivery_man.nickname}}님이</p>
+                            <p>{{details.delivery_owner.nickname}}님께 배달</p>
+                        </div>
+                        
+                        <div class="item">
+                            <p class="middle-title">주문 상품 : </p>
+                            <p>{{details.delivery_list}}</p>
+                        </div>
+                        <div class="item">
+                            <p class="middle-title">주문 일시 : </p>
+                            <p>{{details.ordered_time}}</p>
+                        </div>
+                        <div class="item">
+                            <p class="middle-title">배달 주소 : </p>
+                            <p>{{details.delivery_location}}</p>
+                        </div>
+                        <div class="item">
+                            <p class="middle-title">요구 사항 : </p>
+                            <p>{{details.extra_order}}</p>
+                        </div>
+                        
+                        
+                        {% if details.is_delivered == 1 %}
+                        <a href="{% url 'finish_delivery' details.id %}">배달 완료 수락하기</a>
+                        {% else %}
+                        <p>배달 완료된 주문입니다.</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <!-- 중앙 컨테이너 끝 -->
+            </div>
+            <!-- 중앙 영역 끝 -->
+            <div class="white-space"></div>
+        </div>
+        <!-- 주문 컨테이너 끝 -->
+    </div>
+    <!-- 메인컨테이너 끝 -->
 </body>
 </html>
