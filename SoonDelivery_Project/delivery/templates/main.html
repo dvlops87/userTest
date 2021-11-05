@@ -14,48 +14,54 @@
 <body>
     <div class="container">
         <div class="logo-space">
-            <img src="{% static 'img/wordLogo.svg' %}" alt="순부름 글자 로고" class="word-logo" width=30%>
+            <img src="{% static 'img/wordLogo.svg' %}" alt="순부름 글자 로고" class="word-logo" width=13%>
         </div>
         <div class="slogan-space">
-            <p class="slogan-light">이제는</p>
-            <p class="slogan-bold">효율적으로</p>
-            <p class="slogan-light">움직이자!</p>
-            <p class="explain">필요한 물건을 언제든지</p>
-            <p class="explain">주고받는 순천향 심부름 커뮤니티</p>
-            <br>
+            <div class="large-slogan">
+                <p class="slogan-light">이제는</p>
+                <p class="slogan-bold">효율적으로</p>
+                <p class="slogan-light">움직이자!</p>
+            </div>
+            <div class="explain-space">
+                <p class="explain">필요한 물건을 언제든지</p>
+                <p class="explain">주고받는 순천향 심부름 커뮤니티</p>
+            </div>
         </div>
         <div class="contents">
-            <a href="{% url 'order' user.id %}"><button id="order-button">주문하기</button></a>
+            <a href="{% url 'order' user.id %}">
+                <button id="order-button">주문하기</button>
+            </a>
             <div class="order-list-space">
-                <div class="order-list-tag">배달 목록</div>
-                <div class="order-list">
-                    {% for order in order_list %}
-                    <div class="order">
-                        <div class="user-profile-pic-space">
-                            <img class="user-profile-pic" src="{% static 'img/default-user-profile-pic.png' %}" alt="사용자 프로필 사진">
-                        </div>
-                        <div class="order-preview-space">
-                            <div class="user-name-space">
-                                <p class="user-name">{{order.delivery_owner.nickname}}님</p>
+                <div class="order-list-space2">
+                    <div class="order-list-tag">배달 목록</div>
+                    <div class="order-list">
+                        {% for order in order_list %}
+                        <a class="order" href="{% url 'order_delivery' order.id %}">
+                            <a class="user-profile-pic-space" href="#">
+                                <img class="user-profile-pic" src="{% static 'img/default-user-profile-pic.png' %}" alt="사용자 프로필 사진">
+                            </a>
+                            <div class="order-preview-space">
+                                <div class="user-name-space">
+                                    <p class="user-name">{{order.delivery_owner.nickname}}님</p>
+                                </div>
+                                <div class="order-preview">
+                                    <p class="order-menu">배달 물건 : {{order.delivery_list}}</p>
+                                    <p class="order-place">배달 장소 : {{order.delivery_location}}</p>
+                                    <p class="order-tip">배달 팁 : {{order.delivery_price}}</p>
+                                </div>
                             </div>
-                            <div class="order-preview">
-                                <p class="order-menu">배달 물건 : {{order.delivery_list}}</p>
-                                <p class="order-place">배달 장소 : {{order.delivery_location}}</p>
-                                <p class="order-tip">배달 팁 : {{order.delivery_price}}</p>
-                            </div>
-                            <a href="{% url 'order_delivery' order.id %}">자세히 보기</a>
-                        </div>
+                        </a>
+                        {% endfor %}
                     </div>
-                    {% endfor %}
                 </div>
-            </div>    
+            </div>        
         </div>
     </div>
     <footer>
-        <img src="{% static 'img/activated-main-menu-icon.svg' %}" alt="메인메뉴" class="footer-img" width="10%">
-        <img src="{% static 'img/deactivated-chat-menu-icon.svg' %}" alt="채팅메뉴" class="footer-img" width="10%">
-        <a href="{% url 'my_delivery_history' user.id %}">주문메뉴</a><img src="{% static 'img/deactivated-history-menu-icon.svg' %}" alt="주문메뉴" class="footer-img" width="10%">
-        <a href="{% url 'mypage' user.id %}">마이페이지</a><img src="{% static 'img/deactivated-mypage-menu-icon.svg' %}" alt="마이페이지" class="footer-img" width="10%">
+        <a class="menu-button" href="#"><img src="{% static 'img/activated-main-menu-icon.svg' %}" alt="메인메뉴" class="footer-img" width="50%"></a>
+        <a class="menu-button" href="#"><img src="{% static 'img/deactivated-chat-menu-icon.svg' %}" alt="채팅메뉴" class="footer-img" width="50%"></a>
+        <a class="menu-button" href="{% url 'my_delivery_history' user.id %}"><img src="{% static 'img/deactivated-history-menu-icon.svg' %}" alt="주문메뉴" class="footer-img" width="50%"></a>
+        <a class="menu-button" href="{% url 'mypage' user.id %}"><img src="{% static 'img/deactivated-mypage-menu-icon.svg' %}" alt="마이페이지" class="footer-img" width="50%"></a>
     </footer>
 </body>
 </html>

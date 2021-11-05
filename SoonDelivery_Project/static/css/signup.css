@@ -15,6 +15,7 @@ html {
   align-items: center;
 }
 
+/* top-title-area 시작 */
 #top-title-area {
   width: 100%;
   margin-bottom: 50px;
@@ -23,18 +24,20 @@ html {
   justify-content: center;
 }
 
+.top-title p {
+  margin: 20px;
+  font-size: 2rem;
+  color: #707070;
+}
+/* top-title-area 끝 */
+
+/* 회원가입 폼 시작 */
 #signup-form {
   width: 90%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-.top-title p {
-  margin: 20px;
-  font-size: 2rem;
-  color: #707070;
 }
 
 .item {
@@ -81,3 +84,4 @@ html {
   font-size: 1.4rem;
   color: #707070;
 }
+/* 회원가입 폼 끝 */
