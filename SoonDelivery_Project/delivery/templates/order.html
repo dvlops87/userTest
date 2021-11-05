@@ -1,22 +1,67 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>주문하기</title>
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/order.css' %}">
+    <title>Order</title>
 </head>
+<!-- body 시작 -->
 <body>
-    <form method="POST" action="{% url 'order' user.id %}">
-        {% csrf_token %}
-        <input type="text" name="delivery_location" placeholder="상품 받을 장소">
-        <input type="text" name="store_location" placeholder="가게 주소">
-        <input type="text" name="delivery_price" placeholder="심부름 비용">
-        <hr>
-        <textarea cols="8" rows="10" placeholder="심부름 내용" name="delivery_list"></textarea>
-        <textarea cols="8" rows="10" placeholder="추가 요구 사항" name="extra_order"></textarea>
-        <input type="text" name="stuff_price" placeholder="물건 비용">
-        <button>주문하기</button>
-    </form>
+    <!-- 메인컨테이너 시작 -->
+    <div id="main-container">
+        <!-- 주문 컨테이너 시작 -->
+        <div id="order-container">
+            <!-- top-title-area 시작 -->
+            <div id="top-title-area">
+                <img src="{% static 'img/back-icon.svg' %}" alt="뒤로가기">
+                <div class="top-title">
+                    <p>주문하기</p>
+                </div>
+                <div class="top-white-space"></div>
+            </div>
+            <!-- top-title-area 끝 -->
+            <!-- 주문하기 폼 시작 -->
+            <form method="POST" action="{% url 'order' user.id %}"></form>
+                <!-- 중앙 컨테이너 시작 -->
+                <div id="center-container">
+                    <p class="description">주문서를 작성해 주세요</p>
+                    <div id="order-area">
+                        {% csrf_token %}
+                        <div class="input-container">
+                            <p>배달 주소 : </p>
+                            <input class="input-box" type="text" name="delivery_location">
+                        </div>
+                        <div class="input-container">
+                            <p>상점 주소 : </p>
+                            <input class="input-box" type="text" name="store_location">
+                        </div>
+                        <div class="input-container">
+                            <p>주문 금액 : </p>
+                            <input class="input-box" type="text" name="stuff_price">
+                        </div>
+                        <div class="input-container">
+                            <p>배달 팁 : </p>
+                            <input class="input-box" type="text" name="delivery_price">
+                        </div>
+                        <textarea cols="5" rows="5" placeholder="상품 명" name="delivery_list"></textarea>
+                        <textarea cols="5" rows="5" placeholder="기타 요구 사항" name="extra_order"></textarea>
+                    </div>
+                </div>
+                <!-- 중앙 컨테이너 끝 -->
+                <button class="blue big-button">주문 마치기</button>
+            </form>
+            <!-- 주문하기 폼 끝 -->
+            <!-- 여백 시작 -->
+            <div class="white-space"></div>
+            <!-- 여백 끝 -->
+        </div>
+        <!-- 주문 컨테이너 끝 -->
+    </div>
+    <!-- 메인컨테이너 끝 -->
 </body>
 </html>
