@@ -26,7 +26,7 @@
             </div>
             <!-- top-title-area 끝 -->
             <!-- 주문하기 폼 시작 -->
-            <form method="POST" action="{% url 'order' user.id %}"></form>
+            <form id="order-form" method="POST" action="{% url 'order' user.id %}">
                 <!-- 중앙 컨테이너 시작 -->
                 <div id="center-container">
                     <p class="description">주문서를 작성해 주세요</p>
