@@ -1,32 +1,47 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/mypage.css' %}">
     <title>마이프로필</title>
 </head>
-<body>    
-    {% if details.image %}
-    <p><img src="{{ details.image.url }}" width="200" height="200" alt="없음"></p>
-    {% endif %}
-    
-    <form action="{% url 'mypage' details.id %}" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <p>이미지 : <input type="file" name="image"></p>
-        <button name="change_image">변경</button>
-    <!-- </form> -->
-    <p>이름 : {{details.nickname}}</p>
-    <p>ID : {{details.username}}</p>
-    <p>이메일 : {{details.school_email}}</p>
-    <!-- <form action="{% url 'mypage' details.id %}" method="POST"> -->
-        <!-- {% csrf_token %} -->
-        현재 비밀번호 : <input type="password" name="old_password" placeholder="현재 비밀번호">
-        새로운 비밀번호 : <input type="password" name="new_password" placeholder="현재 비밀번호">
-        {% if error %}
-        {{error}}
-        {% endif %}
-        <button name="change_password">변경</button>
-    </form>
+<body>
+    <div id="main-container">
+        <!-- 주문 컨테이너 시작 -->
+        <div id="mypage-container">
+            <!-- top-title-area 시작 -->
+            <div id="top-title-area">
+                <img src="{% static 'img/back-icon.svg' %}" alt="뒤로가기">
+                <div class="top-title">
+                    <p>마이 프로필</p>
+                </div>
+                <div class="top-white-space"></div>
+            </div>
+        </div>
+        <div id="center-container">
+            {% if details.image %}
+            <p><img id="profile-img" src="{{ details.image.url }}" width="200" height="200" alt="없음"></p>
+            {% endif %}
+            
+            <form action="{% url 'mypage' details.id %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <p>이미지 : <input type="file" name="image"></p>
+                <button name="change_image">변경</button>
+                <p>이름 : {{details.nickname}}</p>
+                <p>ID : {{details.username}}</p>
+                <p>이메일 : {{details.school_email}}</p>
+                현재 비밀번호 : <input type="password" name="old_password" placeholder="현재 비밀번호">
+                새로운 비밀번호 : <input type="password" name="new_password" placeholder="현재 비밀번호">
+                {% if error %}
+                {{error}}
+                {% endif %}
+                <button name="change_password">변경</button>
+            </form>
+            
+        </div>
+    </div>
 </body>
 </html>
