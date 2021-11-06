@@ -1,12 +1,12 @@
 html {
   font-size: 10px;
-  height: max-content;
+  height: 100%;
   margin: 0;
   padding: 0;
 }
 
 body {
-  height: max-content;
+  height: 100%;
   margin: 0;
   padding: 0;
 }
@@ -182,6 +182,12 @@ footer {
   background-color: white;
 }
 
+.menu-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 .footer-img {
-  width: 10%;
+  width: 70%;
 }
