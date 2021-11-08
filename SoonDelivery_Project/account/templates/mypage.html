@@ -10,9 +10,7 @@
 </head>
 <body>
     <div id="main-container">
-        <!-- 주문 컨테이너 시작 -->
         <div id="mypage-container">
-            <!-- top-title-area 시작 -->
             <div id="top-title-area">
                 <img src="{% static 'img/back-icon.svg' %}" alt="뒤로가기">
                 <div class="top-title">
@@ -20,25 +18,26 @@
                 </div>
                 <div class="top-white-space"></div>
             </div>
+            <p class="change_image_buttons"><label for='change_image_button'>프로필 사진 변경 </label>/<label for='change_password_button'> 비밀번호 변경</label></p>
             <div id="img-div">
                 {% if details.image %}
-                <p><img id="profile-img" src="{{ details.image.url }}" width="200" height="200" alt="없음"></p>
+                <label for='change_img'><p><img id="profile-img" src="{{ details.image.url }}" width="200" height="200" alt="없음"></p></label>
                 {% endif %}
             </div>
             <div id="center-container">
                 <form action="{% url 'mypage' details.id %}" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <p>이미지 : <input type="file" name="image" ></p>
-                    <button name="change_image">변경</button>
-                    <p>이름 : {{details.nickname}}</p>
-                    <p>ID : {{details.username}}</p>
-                    <p>이메일 : {{details.school_email}}</p>
-                    현재 비밀번호 : <input type="password" name="old_password" placeholder="현재 비밀번호">
-                    새로운 비밀번호 : <input type="password" name="new_password" placeholder="현재 비밀번호">
+                    <p><input type="file" name="image" id="change_img"></p>
+                    <button name="change_image" id="change_image_button">변경</button>
+                    <p class="info"><strong>이름  </strong>{{details.nickname}}</p>
+                    <p class="info"><strong>ID  </strong>{{details.username}}</p>
+                    <p class="info"><strong>이메일  </strong>{{details.school_email}}</p>
+                    <p class="info"><strong>현재 비밀번호 &nbsp; </strong><input type="password" name="old_password" placeholder="현재 비밀번호"></p>
+                    <p class="info"><strong>새로운 비밀번호  </strong><input type="password" name="new_password" placeholder="현재 비밀번호"></p>
                     {% if error %}
                     {{error}}
                     {% endif %}
-                    <button name="change_password">변경</button>
+                    <button name="change_password" id="change_password_button">변경</button>
                 </form>
             </div>
         </div>
