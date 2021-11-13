@@ -70,3 +70,7 @@ def confirm(request, user_id=0, order_id=0):
     order_detail.save()
     nickname = order_detail.delivery_owner.nickname
     return render(request, 'start_delivery.html', {'order_detail':order_detail, 'nickname':nickname})
+
+def my_delivery_history(request):
+    order_list = delivery_info.objects
+    return render(request, 'my_delivery_history.html', {'order_list':order_list})
