@@ -36,8 +36,8 @@
                     <div class="order-list-tag">배달 목록</div>
                     <div class="order-list">
                         {% for order in order_list %}
-                        <div class="order" href="{% url 'order_delivery' order.id %}">
-                            <div class="user-profile-pic-space" href="#">
+                        <a class="order" href="{% url 'order_delivery' order.id %}">
+                            <div class="user-profile-pic-space">
                                 <img class="user-profile-pic" src="{% static 'img/default-user-profile-pic.png' %}" alt="사용자 프로필 사진">
                             </div>
                             <div class="order-preview-space">
@@ -50,7 +50,7 @@
                                     <p class="order-tip">배달 팁 : {{order.delivery_price}}</p>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                         {% endfor %}
                     </div>
                 </div>
