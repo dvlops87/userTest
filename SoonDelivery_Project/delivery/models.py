@@ -19,3 +19,7 @@ class delivery_info(models.Model):
     # 0이면 배달 대기, 1이면 배달 수락, 2이면 배달 도착
     def __str__(self):
         return str(self.delivery_owner)
+
+class chat_info(models.Model):
+    order = models.ForeignKey('account.User', on_delete=CASCADE, default='',related_name='order')
+    delivery = models.ForeignKey('account.User', on_delete=CASCADE, default='',related_name='delivery')

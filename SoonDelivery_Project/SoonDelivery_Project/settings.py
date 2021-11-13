@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -155,3 +156,14 @@ MEDAI_URL = '/media/'
 AUTHENTICATION_BACKENDS = (
     ('django.contrib.auth.backends.ModelBackend'),
 )
+
+# Channels
+ASGI_APPLICATION = 'SoonDelivery_Project.routing.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        # 'CONFIG': {
+        #     "hosts": [('127.0.0.1', 6379)],
+        # },
+    },
+}
