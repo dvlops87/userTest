@@ -41,19 +41,21 @@ def order_delivery(request, order_id):
 def start_delivery(request, user_id=0, order_id=0):
     if user_id == 0:
         redirect('login')
-    # try:
-    details = get_object_or_404(User, id=user_id)
-    if details.is_trial == 0:
-        return render(request, 'school_email_page.html')
-    else:
-        order_detail = delivery_info.objects.get(id=order_id)
-        new_chat = chat_info()
-        new_chat.order = order_detail.delivery_owner
-        new_chat.delivery = details
-        new_chat.save()
-        return render(request, 'chat.html', {'room_name':new_chat.id})
-    # except ValueError:
-    #         return redirect('login')
+    try:
+        details = get_object_or_404(User, id=user_id)
+        if details.is_trial == 0:
+            return render(request, 'school_email_page.html')
+        else:
+            order_detail = delivery_info.objects.get(id=order_id)
+            order_detail.time_required = 0
+            user = User.objects.get(id=user_id)
+            order_detail.delivery_man = user
+            order_detail.is_delivered = 1
+            order_detail.save()
+            nickname = order_detail.delivery_owner.nickname
+            return render(request, 'start_delivery.html', {'order_detail':order_detail, 'nickname':nickname})
+    except ValueError:
+            return redirect('login')
 
 
 def chat(request, room_name):
