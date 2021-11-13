@@ -59,8 +59,8 @@ html {
     align-items: center;
     border-radius: 25px;
     border: none;
-    background-color: #e7e7e7;
-    box-shadow: 0px 3px 6px #0000003f;
+    /* background-color: #e7e7e7; */
+    /* box-shadow: 0px 3px 6px #0000003f; */
     margin-bottom: 20px;
   }
 #img-div{
@@ -79,4 +79,28 @@ html {
 #input_file_label_img{
     display: flex;
     width: 200px;
+}
+.info{
+  font-size: 15px;
+}
+form {
+  padding-left: 30px;
+}
+input {
+  width: 220px;
+  height: 20px;
+}
+#change_img {
+  display: none;
+}
+#change_image_button {
+  display: none;
+}
+.change_image_buttons{
+  font-size: 8px;
+  display: flex;
+  justify-content: right;
+}
+#change_password_button{
+  display: none;
 }

@@ -30,7 +30,7 @@
                 <div class="order-space">
                     <a class="order-space2" href="{% url 'order_delivery' order.id %}">
                         <div class="order">
-                            <a class="user-profile-pic-space" href="#">
+                            <div class="user-profile-pic-space">
                                 <div class="delivering-tag">
                                     <!-- %if%
                                     <div class="now-delivering">배달 중인 주문</div>
@@ -39,7 +39,7 @@
                                     %endif% -->
                                 </div>
                                 <img class="user-profile-pic" src="{% static 'img/default-user-profile-pic.png' %}" alt="사용자 프로필 사진">
-                            </a>
+                            </div>
                             <div class="order-preview-space">
                                 <div class="order-preview" >
                                     <p class="order-menu">배달 물건 : {{order.delivery_list}}</p>
