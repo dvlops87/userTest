@@ -28,6 +28,8 @@
             <!-- 중앙 컨테이너 시작 -->
             <div id="center-container">
                 <p class="description">{{order_list.delivery_onwer.nickname}}님의 주문서</p>
+                <p id="name" style="display: none;">{{order_list.delivery_onwer.nickname}}</p>
+                <p id="id" style="display: none;">{{order_list.id}}</p>
                 <div id="order-area">
                     {% csrf_token %}
                     <div class="input-container">
@@ -52,7 +54,7 @@
             </div>
             <!-- 중앙 컨테이너 끝 -->
             <a href="{% url 'start_delivery' user.id order_list.id %}">
-                <button class="blue big-button" onclick="">배달하기</button>
+                <button class="blue big-button" id="onclick_order" onclick="">배달하기</button>
             </a>
         <!-- 주문하기 폼 끝 -->
             <!-- 여백 시작 -->
@@ -62,5 +64,11 @@
         <!-- 주문 컨테이너 끝 -->
     </div>
     <!-- 메인컨테이너 끝 -->
+    <script>
+        document.querySelector('#onclick_order').onclick = function(e) {
+            var roomName = document.querySelector('#name').value;
+            window.location.pathname = '/chat/' + roomName + '/';
+        };
+    </script>
 </body>
 </html>
