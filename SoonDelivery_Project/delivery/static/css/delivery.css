@@ -84,6 +84,10 @@ body {
 
 /* 주문 폼 시작 */
 #order-area {
+  width: 100%;
+}
+
+#order-area > div {
   display: flex;
   flex-direction: column;
   flex: 1;

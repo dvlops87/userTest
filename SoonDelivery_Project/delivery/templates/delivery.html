@@ -28,33 +28,36 @@
             <!-- 중앙 컨테이너 시작 -->
             <div id="center-container">
                 <p class="description">{{order_list.delivery_owner.nickname}} 님의 주문서</p>
-                <p id="name" style="display: none;">{{order_list.delivery_owner.nickname}}</p>
-                <p id="id" style="display: none;">{{order_list.id}}</p>
                 <div id="order-area">
-                    {% csrf_token %}
-                    <div class="input-container">
-                        <p>배달 주소 : {{order_list.delivery_location}}</p>
-                    </div>
-                    <div class="input-container">
-                        <p>상점 주소 : {{order_list.store_location}}</p>
-                    </div>
-                    <div class="input-container">
-                        <p>주문 금액 : {{order_list.stuff_price}}</p>
-                    </div>
-                    <div class="input-container">
-                        <p>배달 팁 : {{order_list.delivery_price}}</p>
-                    </div>
-                    <div class="input-container">
-                        <p>상품 명 : {{order_list.delivery_list}}</p>
-                    </div>
-                    <div class="input-container">
-                        <p>기타 요구 사항 : {{order_list.extra_order}}</p>
+                    <div>
+                        <div class="input-container">
+                            <p>배달 주소 : {{order_list.delivery_location}}</p>
+                        </div>
+                        <div class="input-container">
+                            <p>상점 주소 : {{order_list.store_location}}</p>
+                        </div>
+                        <div class="input-container">
+                            <p>주문 금액 : {{order_list.stuff_price}}</p>
+                        </div>
+                        <div class="input-container">
+                            <p>배달 팁 : {{order_list.delivery_price}}</p>
+                        </div>
+                        <div class="input-container">
+                            <p>상품 명 : {{order_list.delivery_list}}</p>
+                        </div>
+                        <div class="input-container">
+                            <p>기타 요구 사항 : {{order_list.extra_order}}</p>
+                        </div>
                     </div>
                 </div>
             </div>
             <!-- 중앙 컨테이너 끝 -->
             <a href="{% url 'start_delivery' user.id order_list.id %}">
-                <button class="blue big-button" id="onclick_order" onclick="">배달하기</button>
+                {% if order_list.delivery_owner.id == user.id %}
+                    <button class="blue big-button" id="onclick_order" onclick="">확인</button>
+                {% else %}
+                    <button class="blue big-button" id="onclick_order" onclick="">배달하기</button>
+                {% endif %}
             </a>
         <!-- 주문하기 폼 끝 -->
             <!-- 여백 시작 -->
