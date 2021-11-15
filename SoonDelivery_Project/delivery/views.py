@@ -47,13 +47,13 @@ def start_delivery(request, user_id=0, order_id=0):
             return render(request, 'school_email_page.html')
         else:
             order_detail = delivery_info.objects.get(id=order_id)
+            delivery_history = delivery_info.objects.filter(delivery_man=user_id) 
             order_detail.time_required = 0
             user = User.objects.get(id=user_id)
             order_detail.delivery_man = user
             order_detail.is_delivered = 1
             order_detail.save()
-            nickname = order_detail.delivery_owner.nickname
-            return render(request, 'start_delivery.html', {'order_detail':order_detail, 'nickname':nickname})
+            return render(request, 'my_delivery_history.html', {'delivery_history':delivery_history})
     except ValueError:
             return redirect('login')
 
