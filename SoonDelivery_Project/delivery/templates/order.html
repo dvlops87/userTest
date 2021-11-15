@@ -34,19 +34,19 @@
                         {% csrf_token %}
                         <div class="input-container">
                             <p>배달 주소 : </p>
-                            <input class="input-box" type="text" name="delivery_location">
+                            <input class="input-box" type="text" name="delivery_location" autocomplete="off">
                         </div>
                         <div class="input-container">
                             <p>상점 주소 : </p>
-                            <input class="input-box" type="text" name="store_location">
+                            <input class="input-box" type="text" name="store_location" autocomplete="off">
                         </div>
                         <div class="input-container">
                             <p>주문 금액 : </p>
-                            <input class="input-box" type="text" name="stuff_price">
+                            <input class="input-box" type="text" name="stuff_price" autocomplete="off">
                         </div>
                         <div class="input-container">
                             <p>배달 팁 : </p>
-                            <input class="input-box" type="text" name="delivery_price">
+                            <input class="input-box" type="text" name="delivery_price" autocomplete="off">
                         </div>
                         <textarea cols="5" rows="5" placeholder="상품 명" name="delivery_list"></textarea>
                         <textarea cols="5" rows="5" placeholder="기타 요구 사항" name="extra_order"></textarea>
