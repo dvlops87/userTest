@@ -1,22 +1,65 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>나의 주문/배달</title>
+    <link rel="stylesheet" href="{% static 'css/font.css' %}">
+    <link rel="stylesheet" href="{% static 'css/history.css' %}">
+    <script type="text/javascript" src="{% static 'js/history.js' %}"></script>
+    <title>배달 내역</title>
 </head>
 <body>
-    {% for delivery in delivery_history %}
-        {% if delivery.is_delivered == 1 %}
-        <p>배달 중인 주문</p>
-        {% else %}
-        <p>배달 완료</p>
-        {% endif %}
-    <p>배달 물건 : {{delivery.delivery_list}}</p>
-    <p>배달 장소 : {{delivery.delivery_location}}</p>
-    <p>배달팁 : {{delivery.delivery_price}}</p>
-    <a href="{% url 'delivery_detail' delivery.id %}">자세히 보기</a>
-    {% endfor %}
+    <div class="container">
+        <div id="top-title-area">
+            <a href="{% url 'home' %}" class="back-button">
+                <img src="{% static 'img/back-icon.svg' %}" alt="뒤로가기">
+            </a>
+            <div class="top-title">
+                <p class="title">나의 주문/배달</p>
+            </div>
+            <div class="top-right-space">
+                <img src="{% static 'img/back-icon.svg' %}">
+            </div>
+        </div>
+        <div class="contents">
+            <div class="tab">
+                <a href="{% url 'my_order_history' user.id %}" class="deactivated-tab-button">주문 내역</a>
+                <div class="button-space"></div>
+                <div class="activated-tab-button">배달 내역</div>
+            </div>
+            <div class="order-list-space">
+                {% for delivery in delivery_history %}
+                <div class="order-space">
+                    <div class="order-space2">
+                        <a class="order" href="{% url 'delivery_detail' delivery.id %}">
+                            <div class="left-space">
+                                <div class="delivering-tag">
+                                    {% if delivery.is_delivered == 1 %}
+                                    <div class="now-delivering">배달 중인 주문 </div>
+                                    {% else %}
+                                    <div class="is-delivered">배달 완료</div>
+                                    {% endif %}
+                                </div>
+                                <div class="user-profile-pic-space">
+                                    <img class="user-profile-pic" src="{% static 'img/default-user-profile-pic.png' %}" alt="사용자 프로필 사진">
+                                </div>
+                            </div>
+                            <div class="order-preview-space">
+                                <div class="order-preview" >
+                                    <p class="order-menu">배달 물건 : {{delivery.delivery_list}}</p>
+                                    <p class="order-place">배달 장소 : {{delivery.delivery_location}}</p>
+                                    <p class="order-tip">배달 팁 : {{delivery.delivery_price}}</p>
+                                </div>
+                            </div>                           
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 </body>
 </html>
