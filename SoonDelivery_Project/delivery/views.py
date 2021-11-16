@@ -53,7 +53,3 @@ def start_delivery(request, user_id=0, order_id=0):
         return render(request, 'start_delivery.html', {'order_detail':order_detail, 'nickname':nickname})
     except ValueError:
             return redirect('login')
-
-def my_delivery_history(request):
-    order_list = delivery_info.objects
-    return render(request, 'my_delivery_history.html', {'order_list':order_list})
