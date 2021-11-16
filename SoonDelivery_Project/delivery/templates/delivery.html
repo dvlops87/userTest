@@ -18,7 +18,7 @@
         <div id="order-container">
             <!-- top-title-area 시작 -->
             <div id="top-title-area">
-                <img src="{% static 'img/back-icon.svg' %}" alt="뒤로가기">
+                <img src="{% static 'img/back-icon.svg' %}" onclick="history.back()" alt="뒤로가기">
                 <div class="top-title">
                     <p>배달 세부 사항</p>
                 </div>
@@ -52,13 +52,16 @@
                 </div>
             </div>
             <!-- 중앙 컨테이너 끝 -->
-            <a href="{% url 'start_delivery' user.id order_list.id %}">
-                {% if order_list.delivery_owner.id == user.id %}
+            <!-- 주문자 본인이거나 주문이 완료된 경우 -->
+            {% if order_list.delivery_owner.id == user.id or order_list.is_delivered == 2%}
+                <a href="{% url 'my_order_history' user.id %}">
                     <button class="blue big-button" id="onclick_order" onclick="">확인</button>
-                {% else %}
+                </a>
+            {% else %}
+                <a href="{% url 'start_delivery' user.id order_list.id %}">
                     <button class="blue big-button" id="onclick_order" onclick="">배달하기</button>
-                {% endif %}
-            </a>
+                </a>
+            {% endif %}
         <!-- 주문하기 폼 끝 -->
             <!-- 여백 시작 -->
             <div class="white-space"></div>
@@ -73,5 +76,13 @@
             window.location.pathname = '/chat/' + roomName + '/';
         };
     </script>
+    <!-- footer 시작 -->
+    <footer>
+        <a class="menu-button" href="{% url 'home' %}"><img src="{% static 'img/deactivated-main-menu-icon.svg' %}" alt="메인메뉴" class="footer-img"></a>
+        <a class="menu-button" href="#"><img src="{% static 'img/deactivated-chat-menu-icon.svg' %}" alt="채팅메뉴" class="footer-img"></a>
+        <a class="menu-button" href="{% url 'my_delivery_history' user.id %}"><img src="{% static 'img/activated-history-menu-icon.svg' %}" alt="주문메뉴" class="footer-img"></a>
+        <a class="menu-button" href="{% url 'mypage' user.id %}"><img src="{% static 'img/deactivated-mypage-menu-icon.svg' %}" alt="마이페이지" class="footer-img"></a>
+    </footer>
+    <!-- footer 끝 -->
 </body>
 </html>
