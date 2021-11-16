@@ -19,6 +19,7 @@ from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from .tokens import account_activation_token 
 from datetime import datetime, timezone
+from django.utils import timezone
 from django.contrib.auth.hashers import check_password
 # Create your views here.
 # def home(request):
@@ -128,7 +129,7 @@ def delivery_detail(request, delivery_id):
 def finish_delivery(request, delivery_id):
     details = delivery_info.objects.get(id=delivery_id)
     if(details.is_delivered != 2):
-        now = datetime.now(timezone.utc)
+        now = timezone.now()
         date_to_compare = details.ordered_time
         date_diff = now - date_to_compare
         time = int(round(date_diff.seconds / 60))

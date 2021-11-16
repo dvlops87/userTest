@@ -42,4 +42,6 @@ urlpatterns = [
     path('order/<str:user_id>', d.order, name='order'),
     path('order_delivery/<str:order_id>', d.order_delivery, name="order_delivery"),
     path('start_delivery/<int:user_id>/<str:order_id>', d.start_delivery, name="start_delivery"),
+
+    path('<str:room_name>/', d.chat, name="chat"),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

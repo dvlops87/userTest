@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate
-from .models import delivery_info
+from .models import chat_info, delivery_info
 from account.models import User
 from django.utils import timezone
+from django.utils.safestring import mark_safe
+import json
 # Create your views here.
 
 
@@ -43,13 +45,30 @@ def start_delivery(request, user_id=0, order_id=0):
         details = get_object_or_404(User, id=user_id)
         if details.is_trial == 0:
             return render(request, 'school_email_page.html')
-        order_detail = delivery_info.objects.get(id=order_id)
-        order_detail.time_required = 0
-        user = User.objects.get(id=user_id)
-        order_detail.delivery_man = user
-        order_detail.is_delivered = 1
-        order_detail.save()
-        nickname = order_detail.delivery_owner.nickname
-        return render(request, 'start_delivery.html', {'order_detail':order_detail, 'nickname':nickname})
+        else:
+            order_detail = delivery_info.objects.get(id=order_id)
+            delivery_history = delivery_info.objects.filter(delivery_man=user_id) 
+            order_detail.time_required = 0
+            user = User.objects.get(id=user_id)
+            order_detail.delivery_man = user
+            order_detail.is_delivered = 1
+            order_detail.save()
+            return render(request, 'my_delivery_history.html', {'delivery_history':delivery_history})
     except ValueError:
             return redirect('login')
+
+
+def chat(request, room_name):
+    chat_detail = chat_info.objects.get(id=room_name)
+    order_man = User.objects.get(id = chat_detail.order)
+    return render(request, 'chat.html', {'room_name': room_name, 'order_man':order_man})
+  
+def confirm(request, user_id=0, order_id=0):
+    order_detail = delivery_info.objects.get(id=order_id)
+    order_detail.time_required = 0
+    user = User.objects.get(id=user_id)
+    order_detail.delivery_man = user
+    order_detail.is_delivered = 1
+    order_detail.save()
+    nickname = order_detail.delivery_owner.nickname
+    return render(request, 'start_delivery.html', {'order_detail':order_detail, 'nickname':nickname})
