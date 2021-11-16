@@ -61,5 +61,13 @@
             </div>
         </div>
     </div>
+    <!-- footer 시작 -->
+    <footer>
+        <a class="menu-button" href="{% url 'home' %}"><img src="{% static 'img/deactivated-main-menu-icon.svg' %}" alt="메인메뉴" class="footer-img"></a>
+        <a class="menu-button" href="#"><img src="{% static 'img/deactivated-chat-menu-icon.svg' %}" alt="채팅메뉴" class="footer-img"></a>
+        <a class="menu-button" href="{% url 'my_delivery_history' user.id %}"><img src="{% static 'img/activated-history-menu-icon.svg' %}" alt="주문메뉴" class="footer-img"></a>
+        <a class="menu-button" href="{% url 'mypage' user.id %}"><img src="{% static 'img/deactivated-mypage-menu-icon.svg' %}" alt="마이페이지" class="footer-img"></a>
+    </footer>
+    <!-- footer 끝 -->
 </body>
 </html>
