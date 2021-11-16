@@ -34,7 +34,9 @@ urlpatterns = [
     path('my_delivery_history/<str:user_id>', a.my_delivery_history, name='my_delivery_history'),
     path('my_order_history/<str:user_id>', a.my_order_history, name='my_order_history'),
     path('delivery_detail/<str:delivery_id>', a.delivery_detail, name='delivery_detail'),
+    path('order_detail/<str:delivery_id>', a.order_detail, name='order_detail'),
     path('finished_delivery/<str:delivery_id>', a.finish_delivery, name='finish_delivery'),
+    path('finished_order/<str:delivery_id>', a.finish_order, name='finish_order'),
     path('mypage/<str:user_id>', a.mypage, name='mypage'),
     # path('mypage/<str:user_id>', a.update, name='update'),
     
