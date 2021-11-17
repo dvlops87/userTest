@@ -21,6 +21,7 @@ from .tokens import account_activation_token
 from datetime import datetime, timezone
 from django.utils import timezone
 from django.contrib.auth.hashers import check_password
+from django.db import IntegrityError
 # Create your views here.
 # def home(request):
 #     return render(request, 'home.html')
@@ -54,29 +55,35 @@ def activate(request, uid64, token):
 
 def user_signup(request):    
     if request.method == "POST" :
-        user = User.objects.create_user(
-            nickname = request.POST["nickname"],
-            username = request.POST["username"],
-            password = request.POST["password"],
-            department = request.POST["department"],
-            school_email = request.POST["school_email"],
-            school_number = request.POST["school_number"],
-        )
-        user.is_trial = True
-        user.save()
-        current_site = get_current_site(request) 
-        message = render_to_string('user_activate_email.html',                         {
-            'user': user,
-            'domain': current_site.domain,
-            'uid': urlsafe_base64_encode(force_bytes(user.pk)).encode().decode(),
-            'token': account_activation_token.make_token(user),
-        })
-        mail_subject = "[순부름] 회원가입 인증 메일입니다."
-        user_email = user.school_email
-        email = EmailMessage(mail_subject, message, to=[user_email])
-        email.send()
-        return redirect('home')
+        try :
+            user = User.objects.create_user(
+                nickname = request.POST["nickname"],
+                username = request.POST["username"],
+                password = request.POST["password"],
+                department = request.POST["department"],
+                school_email = request.POST["school_email"],
+                school_number = request.POST["school_number"],
+            )
+            user.is_trial = True
+            user.save()
+            current_site = get_current_site(request) 
+            message = render_to_string('user_activate_email.html',                         {
+                'user': user,
+                'domain': current_site.domain,
+                'uid': urlsafe_base64_encode(force_bytes(user.pk)).encode().decode(),
+                'token': account_activation_token.make_token(user),
+            })
+            mail_subject = "[순부름] 회원가입 인증 메일입니다."
+            user_email = user.school_email
+            email = EmailMessage(mail_subject, message, to=[user_email])
+            email.send()
+            return redirect('home')
+        except IntegrityError:
+            return render(request, 'check.html')
     return render(request, 'signup.html')
+
+def check(request):
+    return render(request, 'check.html')
 
 def user_logout(request):
     logout(request)
@@ -177,3 +184,27 @@ def mypage(request, user_id=0):
                 return render(request, 'mypage.html', {'details':details})
         except ValueError:
             return redirect('login')
+
+def checkNickname(request):
+    try:
+        user = User.objects.get(nickname=request.GET['nickname'])
+    except Exception as e:
+        user = None
+    result = {
+        'result':'success',
+        # 'data' : model_to_dict(user)  # console에서 확인
+        'data' : "not exist" if user is None else "exist"
+    }
+    return JsonResponse(result)
+
+def checkUsername(request):
+    try:
+        user = User.objects.get(username=request.GET['username'])
+    except Exception as e:
+        user = None
+    result = {
+        'result':'success',
+        # 'data' : model_to_dict(user)  # console에서 확인
+        'data' : "not exist" if user is None else "exist"
+    }
+    return JsonResponse(result)

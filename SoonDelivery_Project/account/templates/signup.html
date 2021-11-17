@@ -8,10 +8,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/reset.css' %}">
     <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
     <title>Sign Up</title>
 </head>
 <!-- body 시작 -->
 <body>
+    <script>
+        /* 중복체크! */
+        $(function(){
+            $('#nickname_check').click(function(){
+                var nickname = $('#nickname').val()
+                if(nickname == ''){
+                    alert('닉네임을 입력해주세요.')
+                    return;
+                }
+                $.ajax({
+                    url:'/user/api/checkNickname?nickname='+nickname,
+                    type:'get',
+                    dataType:'json',
+                    success:function(response){
+                        if(response.result != 'success'){
+                            console.error(response.data)
+                            return;
+                        }
+                        if(response.data == 'exist'){
+                            alert("존재하는 닉네임 입니다!");
+                            $('#nickname').val('').focus();
+                            return;
+                        }else{
+                            alert("사용 가능한 닉네임 입니다!");
+                            document.getElementById('nickname').readOnly = true;
+                            return;
+                        }
+                    },
+                    error : function(xhr, error){
+                        alert("서버와의 통신에서 문제가 발생했습니다.");
+                        console.error("error : " + error);
+                    }
+                })
+            });
+
+            $('#username_check').click(function(){
+                var username = $('#username').val()
+                if(username == ''){
+                    alert('ID을 입력해주세요.')
+                    return;
+                }
+                $.ajax({
+                    url:'/user/api/checkUsername?username='+username,
+                    type:'get',
+                    dataType:'json',
+                    success:function(response){
+                        if(response.result != 'success'){
+                            console.error(response.data)
+                            return;
+                        }
+                        if(response.data == 'exist'){
+                            alert("존재하는 ID 입니다!");
+                            $('#username').val('').focus();
+                            return;
+                        }else{
+                            document.getElementById('username').readOnly = true;
+                            alert("사용 가능한 ID 입니다!");
+                            return;
+                        }
+                    },
+                    error : function(xhr, error){
+                        alert("서버와의 통신에서 문제가 발생했습니다.");
+                        console.error("error : " + error);
+                    }
+                })
+            });
+        });
+    </script>
     <!-- 메인컨테이너 시작 -->
     <div id="main-container">
         <!-- 로그인 컨테이너 시작 -->
@@ -32,8 +101,8 @@
                         <p>닉네임</p>
                     </div>
                     <div class="input-area">
-                        <input class="input-box" type="text" name="nickname" placeholder="닉네임 입력"required>
-                        <button class="white-button">중복 확인</button>
+                        <input class="input-box" type="text" id='nickname' name="nickname" placeholder="닉네임 입력"required>
+                        <button class="white-button" id="nickname_check" type="button">중복 확인</button>
                     </div>
                 </div>
                 <div class="item">
@@ -41,8 +110,8 @@
                         <p>ID</p>
                     </div>
                     <div class="input-area">
-                        <input class="input-box" type="text" name="username" placeholder="ID 입력"required><br>
-                        <button class="white-button">중복 확인</button>
+                        <input class="input-box" type="text" id="username" name="username" placeholder="ID 입력"required><br>
+                        <button class="white-button" id="username_check" type="button">중복 확인</button>
                     </div>
                 </div>
                 <div class="item">
@@ -51,14 +120,6 @@
                     </div>
                     <div class="input-area">
                         <input class="input-box" type="password" name="password" placeholder="비밀번호 입력"required><br>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="middle-title">
-                        <p>비밀번호 확인</p>
-                    </div>
-                    <div class="input-area">
-                        <input class="input-box" type="password" name="verify_password" placeholder="비밀번호 재입력"required><br>
                     </div>
                 </div>
                 <div class="item">

@@ -38,6 +38,9 @@ urlpatterns = [
     path('finished_delivery/<str:delivery_id>', a.finish_delivery, name='finish_delivery'),
     path('finished_order/<str:delivery_id>', a.finish_order, name='finish_order'),
     path('mypage/<str:user_id>', a.mypage, name='mypage'),
+    path('user/api/checkNickname', a.checkNickname),
+    path('user/api/checkUsername', a.checkUsername),
+    path('check/', a.check, name='check'),
     # path('mypage/<str:user_id>', a.update, name='update'),
     
     path('', d.home, name="home"),
