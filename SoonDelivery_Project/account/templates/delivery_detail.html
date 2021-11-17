@@ -20,7 +20,7 @@
             <div id="top-title-area">
                 <img src="{% static 'img/back-icon.svg' %}" onclick="history.back()" alt="뒤로가기">
                 <div class="top-title">
-                    <p>나의 주문</p>
+                    <p>나의 배달</p>
                 </div>
                 <div class="top-white-space"></div>
             </div>
@@ -28,17 +28,22 @@
             <!-- 중앙 영역 시작 -->
             <div id=middle-area>
                 <div class="blue big-button center-align">
-                    <p class="bold">주문 상세사항</p>
+                    <p class="bold">배달 상세사항</p>
                 </div>
                 <!-- 중앙 컨테이너 시작 -->
                 <div id="center-container">
                     <div class="content-container">
+                        <!-- 배달중일 경우 -->
+                        {% if details.is_delivered == 1 %}
+                            <p>배달을 {{ time }}분째 기다리고 있어요</p>
+                        {% endif %}
+                        <!-- 배달이 완료된 경우 -->
                         {% if details.is_delivered == 2 %}
-                        <p>배달이 {{time}}분만에 도착했습니다.</p>
+                            <p>배달이 {{time}}분만에 도착했습니다</p>
                         {% endif %}
                         <div class="bold name-info">
-                            <p>{{details.delivery_man.nickname}}님이</p>
-                            <p>{{details.delivery_owner.nickname}}님께 배달</p>
+                            <p>{{details.delivery_owner.nickname}}님이</p>
+                            <p>배달을 기다리는 중이에요</p>
                         </div>
                         
                         <div class="item">
@@ -68,13 +73,13 @@
                     <div>
                         <div class="bottom-content-container">
                             <div class="bold name-info">
-                                <p>명예의 배달기사,</p>
-                                <p>{{details.delivery_man.nickname}}님!</p>
+                                <p>{{details.delivery_man.nickname}}님,</p>
+                                <p>배달을 완료하셨나요?</p>
                             </div>
                             <div id="profile-area">
-                                {% if details.delivery_man.image %}
+                                {% if details.delivery_owner.image %}
                                     <div class="profile-container">
-                                        <img class="profile-image" src="{{ details.delivery_man.image.url }}" alt="">
+                                        <img class="profile-image" src="{{ details.delivery_owner.image.url }}" alt="">
                                     </div>
                                 {% else %}
                                     <div class="profile-container">
@@ -84,7 +89,7 @@
                             </div>
                             <div id="delivery-man-info">
                                 <p class="middle-title">아이디 </p>
-                                <p>{{details.delivery_man.username}}</p>
+                                <p>{{details.delivery_owner.username}}</p>
                             </div>
                             <div id="button-button-area">
                                 {% if details.is_delivered == 1 %}
