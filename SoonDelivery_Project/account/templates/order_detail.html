@@ -33,12 +33,13 @@
                 <!-- 중앙 컨테이너 시작 -->
                 <div id="center-container">
                     <div class="content-container">
+                        <!-- 배달이 도착했을 경우 -->
                         {% if details.is_delivered == 2 %}
                         <p>배달이 {{time}}분만에 도착했습니다.</p>
                         {% endif %}
                         <div class="bold name-info">
                             <p>{{details.delivery_man.nickname}}님이</p>
-                            <p>{{details.delivery_owner.nickname}}님께 배달</p>
+                            <p>{{details.delivery_owner.nickname}}님께 배달중!</p>
                         </div>
                         
                         <div class="item">
