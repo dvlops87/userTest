@@ -40,7 +40,9 @@
                 </div>
                 <div id="button-area">
                     <button class="blue big-button">로그인</button>
-                    <button class="gray big-button">회원가입</button>
+                    <button class="gray big-button" type="button" onclick="location.href='/signup/'">회원가입</button>
+                    
+                    
                 </div>
                 {% if 'error' %}
                     <p>{{error}}</p>
