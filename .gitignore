@@ -162,7 +162,8 @@ pythonenv*
 .mypy_cache/
 .dmypy.json
 dmypy.json
-
+#내가 추가함
+secrets.json
 # Pyre type checker
 .pyre/
 
